@@ -18,7 +18,7 @@ int group_points_grad_wrapper_fast(int b, int c, int n, int npoints, int nsample
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
 
     group_points_grad_kernel_launcher_fast(b, c, n, npoints, nsample, grad_out, idx, grad_points, stream);
@@ -36,7 +36,7 @@ int group_points_wrapper_fast(int b, int c, int n, int npoints, int nsample,
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
 
     group_points_kernel_launcher_fast(b, c, n, npoints, nsample, points, idx, out, stream);

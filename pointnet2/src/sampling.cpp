@@ -17,7 +17,7 @@ int gather_points_wrapper_fast(int b, int c, int n, int npoints,
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
     gather_points_kernel_launcher_fast(b, c, n, npoints, points, idx, out, stream);
     return 1;
@@ -34,7 +34,7 @@ int gather_points_grad_wrapper_fast(int b, int c, int n, int npoints,
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
     gather_points_grad_kernel_launcher_fast(b, c, n, npoints, grad_out, idx, grad_points, stream);
     return 1;
@@ -51,7 +51,7 @@ int furthest_point_sampling_wrapper(int b, int n, int m,
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
     furthest_point_sampling_kernel_launcher(b, n, m, points, temp, idx, stream);
     return 1;

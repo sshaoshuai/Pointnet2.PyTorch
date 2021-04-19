@@ -26,7 +26,7 @@ int ball_query_wrapper_fast(int b, int n, int m, float radius, int nsample,
 #ifdef THCState_getCurrentStream
     cudaStream_t stream = THCState_getCurrentStream(state);
 #else
-    cudaStream_t stream = c10::cuda::getCurrentCUDAStream();
+    cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 #endif
     ball_query_kernel_launcher_fast(b, n, m, radius, nsample, new_xyz, xyz, idx, stream);
     return 1;
