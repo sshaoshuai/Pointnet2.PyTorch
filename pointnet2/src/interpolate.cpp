@@ -1,15 +1,13 @@
 #include <torch/serialize/tensor.h>
 #include <vector>
-#include <THC/THC.h>
+#include <ATen/cuda/CUDAContext.h>
+#include <ATen/cuda/CUDAEvent.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <cuda.h>
 #include <cuda_runtime_api.h>
 #include "interpolate_gpu.h"
-
-extern THCState *state;
-
 
 void three_nn_wrapper_fast(int b, int n, int m, at::Tensor unknown_tensor, 
     at::Tensor known_tensor, at::Tensor dist2_tensor, at::Tensor idx_tensor) {
